@@ -27,6 +27,11 @@ Please write to deepaksamuel@gmail.com for any help, suggestions or comments!
 
 - Signin: Only Google accounts are allowed for the time-being.
 - Pricing: Free of cost 
+- Limitations: 
+    - Maximum particles: 50000
+    - Tracks available for visualization: First 100 tracks only
+    - Physics list: Only major reference lists
+    - Geometry: Only Cube, Sphere (hollow) and Cylinder (hollow)
 
 ## After signing in
 You will see a empty scene with a menu bar and a side bar. 
@@ -194,17 +199,144 @@ Activities:
 - Analyze the intensity of particles as a function of target thickness
 - Change the Gold foil to other materials and repeat the analysis
 
-You can download the alpha-scattering.json file in this repository and open it using the file menu to get all these settings. 
+You can download the alpha-scattering.json file in this repository and open it using the file menu to get all these settings.  You can then click on `Shoot Particles` to start the simulations.
+
 ---
 
 ## 2. Spectrum of Co 60
+### Goal
+
+To study the energy/particle spectrum of Co-60 and the spectrum of beta-particles, study end-point energy
+### Setup
+
+Place a Co-60 source at the centre and place a spherical dectector that encloses such that particle emitted in all 4pi directions can be detected.
+
+- Gun Settings: 
+
+    - Particle source: Disabled
+    - Ion A/Z: 60, 27
+    - Position: 0,0,0 
+    - Direction: 0,0,0
+    - Shape: Point source
+    - Spectrum: Monoenergetic
+    - Energy [MeV]: 0, 0
+    - Events: 10000
+
+- World settings:
+    - Physics list: FTFP_BERT_HP
+    - Size (mm): 10, 10, 10 
+    - Mag field: 0, 0, 0
+    - World material: G4_AIR
+
+- Geometries:
+    - Sphere (detector)  
+        - Position (mm): 0, 0, 0
+        - Rotation: 0, 0, 0
+        - Material: G4_AIR
+        - Record data: Yes
+        - Radius: (4) mm 
+
+Run and Shoot particles to see the tracks and get the data. If you now plot the energy spectrum, you should see two distinct peaks at 1.1732 MeV and 1.3325 MeV which corresponds to two gamma emission. You can also see the beta spectrum at the lower energies
+
+Activities:
+- Plot the globtime variable and check if you can get the half-life of Co-60 from this plot (5.2714 years)
+- Download the data and plot the energy spectrum of beta alone.
+- Check what type of neutrinos are present and plot the energy spectrum of neutrinos alone.
+- Do you see any correlations between the neutrino energy and the electron energy? 
+- Calculate the ratio of electrons to gammas in the enetire sample.
+
+You can download the Co-60.json file in this repository and open it using the file menu to get all these settings. You can then click on `Shoot Particles` to start the simulations.
+
 ## 3. Measurement of nuclear radius: Hofstadter experiment
 ## 4. Proton propogation in matter: Bragg peak analysis
 ## 5. Neutron physics experiments:
 ## 6. Air shower propagation
 ## 7. Sampling Calorimeters and energy measurement using magnetic fields
+
+
+### Goal
+
+To study the propagation of charged particles in magnetic field and measurement of energy using sampling calorimeters
+
+### Setup
+
+Place 5 Iron plates seperated by some Air gap. Shoot muons of a certain energy from the top. Setting the magnetic field to about 1 T, you will observe the particles to take up a curved trajectory with the extent of curvature depending on the energy and the strength of the magnetic field.
+
+- Gun Settings: 
+
+    - Particle source: Enabled
+    - Particle type: Mu+ or Mu-
+    - Position: 0,200,0 
+    - Direction: 0,-1,0
+    - Shape: Point source
+    - Spectrum: Monoenergetic
+    - Energy [MeV]: 1500, 1500
+    - Events: 100
+
+- World settings:
+    - Physics list: FTFP_BERT
+    - Size (mm): 1000, 1000, 1000 
+    - Mag field (gauss): 0, 0, 10000
+    - World material: G4_AIR
+
+- Geometries:
+    - Box  (5)
+        - Position (mm): 0, 0, 0 and clone it to produce the others
+        - Rotation: 0, 0, 0
+        - Material: G4_Fe
+        - Record data: No
+        - Size: (500, 16, 500) mm 
+
+Run and Shoot particles to see the bending tracks of muons. Visualize the effect of magnetic field and energy of the particle on the curvature of the tracks. You can also shoot mu- instead of mu+ and observe how the curvature changes. 
+
+Observe the curvature for protons.
+
+You can download the sampling-calorimeter.json file in this repository and open it using the file menu to get all these settings. You can then click on `Shoot Particles` to visualize the tracks.
+
 ## 8. Muon decay and lifetime measurement
+To study the muon decay scheme and to measure its lifetime.
+
+### Setup
+
+Place a muon source at rest and detect the final state particles from its decay.
+
+- Gun Settings: 
+
+    - Particle source: Enabled
+    - Particle type: mu-
+    - Position: 0,0,0 
+    - Direction: 0,0,0
+    - Shape: Point source
+    - Spectrum: Monoenergetic
+    - Energy [MeV]: 0, 0
+    - Events: 10000
+
+- World settings:
+    - Physics list: FTFP_BERT
+    - Size (mm): 10, 10, 10
+    - Mag field (gauss): 0, 0, 0
+    - World material: G4_AIR
+
+- Geometries:
+    - Sphere  (detector)
+        - Position (mm): 0, 0, 0
+        - Rotation: 0, 0, 0
+        - Material: G4_AIR
+        - Record data: Yes
+        - Radius: 4 mm 
+
+Run and Shoot particles to see the final state particles from the decay. Download the dataset to perform basic analysis
+
+Activities:
+- Check the particles in the final state
+- Plot the globtime variable for electrons only and fit a exponential function to obtain the lifetime of the muon
+
+You can download the Co-60.json file in this repository and open it using the file menu to get all these settings. You can then click on `Shoot Particles` to start the simulations.
+
+You can download the muon-lifetime.json file in this repository and open it using the file menu to get all these settings. You can then click on `Shoot Particles` to visualize the tracks.
+
 ## 9. Designing a simple kalman filter for track fitting
+
 ## 10. Study of plastic scintillators
 
 more suggestions welcome!
