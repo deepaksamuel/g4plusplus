@@ -346,7 +346,8 @@ more suggestions welcome!
 
 
 
-
+---
+*This software was designed using Geant4 and Three.js libraries*
 
 
 
